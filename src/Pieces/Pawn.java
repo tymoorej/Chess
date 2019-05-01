@@ -45,11 +45,6 @@ public class Pawn extends Piece implements IHasMoved{
     }
 
     @Override
-    public void draw() {
-
-    }
-
-    @Override
     public boolean hasPieceMoved() {
         return hasMoved;
     }

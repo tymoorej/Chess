@@ -1,6 +1,7 @@
 package Pieces;
 
 import Board.BoardPosition;
+import Board.Distance2D;
 
 public class Queen extends Piece {
     private static final int value = 9;
@@ -18,6 +19,20 @@ public class Queen extends Piece {
 
     @Override
     public boolean isMoveValid(BoardPosition start, BoardPosition end) {
+        Distance2D distance = start.distanceTo(end);
+
+        if (distance.getxDistance() == 0 && distance.getyDistance() == 0){
+            return false;
+        }
+
+        if (Math.abs(distance.getxDistance()) == Math.abs(distance.getyDistance())){
+            return true;
+        }
+
+        if (distance.getxDistance() * distance.getyDistance() == 0){
+            return true;
+        }
+
         return false;
     }
 
@@ -31,8 +46,4 @@ public class Queen extends Piece {
         return colour;
     }
 
-    @Override
-    public void draw() {
-
-    }
 }

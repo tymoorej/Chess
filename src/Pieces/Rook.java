@@ -44,10 +44,6 @@ public class Rook extends Piece implements IHasMoved{
         return colour;
     }
 
-    @Override
-    public void draw() {
-
-    }
 
     @Override
     public boolean hasPieceMoved() {

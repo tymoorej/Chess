@@ -25,7 +25,11 @@ public class Bishop extends Piece {
             return false;
         }
 
-        return Math.abs(distance.getxDistance()) == Math.abs(distance.getyDistance());
+        if (Math.abs(distance.getxDistance()) == Math.abs(distance.getyDistance())){
+            return true;
+        }
+
+        return false;
     }
 
     @Override
@@ -38,8 +42,4 @@ public class Bishop extends Piece {
         return colour;
     }
 
-    @Override
-    public void draw() {
-
-    }
 }
