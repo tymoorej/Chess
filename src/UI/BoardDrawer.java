@@ -2,7 +2,7 @@ package UI;
 
 import Board.Board;
 import Board.BoardPosition;
-import Board.XPosition;
+import Enums.XPosition;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,7 +62,7 @@ public class BoardDrawer extends JPanel {
         for (int i = 0; i < boardXSections; i++){
             for (int j = 0; j < boardYSections; j++){
                 if ((i + j) % 2 == 1){
-                    c = Color.BLACK;
+                    c = Color.gray;
                 }
                 else{
                     c = Color.WHITE;
@@ -94,12 +94,13 @@ public class BoardDrawer extends JPanel {
                     boardStartY + boardHieght - boardYSectionSize*j - boardYSectionSize/2);
         }
 
-        g.setColor(Color.RED);
-        g.setFont(new Font("Indepth Locations", Font.BOLD, 10));
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Title", Font.BOLD, 50));
+        g.drawString("White Turn", 20, 60);
 
         for (int i = 0; i < boardXSections; i++){
             for (int j = 0; j < boardYSections; j++){
-                boardDrawableRectangles[i][j].displayLabel(g);
+                boardDrawableRectangles[i][j].drawPiece(g, board);
             }
         }
 

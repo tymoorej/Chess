@@ -62,4 +62,16 @@ public class Pawn extends Piece implements IHasMoved{
     public void setPieceMoved() {
         hasMoved = true;
     }
+
+    @Override
+    protected String getPieceName() {
+        return "pawn";
+    }
+
+    @Override
+    public String toString() {
+        return "Pawn{" +
+                "colour=" + colour +
+                '}';
+    }
 }

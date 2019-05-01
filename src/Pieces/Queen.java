@@ -46,4 +46,15 @@ public class Queen extends Piece {
         return colour;
     }
 
+    @Override
+    protected String getPieceName() {
+        return "queen";
+    }
+
+    @Override
+    public String toString() {
+        return "Queen{" +
+                "colour=" + colour +
+                '}';
+    }
 }

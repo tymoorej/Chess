@@ -1,8 +1,12 @@
 package UI;
 
+import Board.Board;
+import Board.Square;
 import Board.BoardPosition;
+import Pieces.Piece;
 
 import java.awt.*;
+import java.awt.image.ImageObserver;
 
 public class BoardDrawableRectangle{
     private int xStart;
@@ -37,9 +41,15 @@ public class BoardDrawableRectangle{
                 xStart + xSize/2, yStart + ySize/2);
     }
 
-    public void drawPiece(Graphics g){
-        g.drawString(position.getxPosition().name() + "-" + position.getyPosition(),
-                xStart + xSize/2, yStart + ySize/2);
+    public void drawPiece(Graphics g, Board board){
+        Square square = board.getSquare(position);
+        Piece piece = square.getPiece();
+        if (!square.isEmpty()){
+            Image image = piece.getImage();
+            if (image != null){
+                g.drawImage(image,xStart, yStart, xSize, ySize, null);
+            }
+        }
     }
 
     public static BoardDrawableRectangle getRectangleClicked(BoardDrawableRectangle[][] boardDrawableRectangles, int xPos, int yPos){

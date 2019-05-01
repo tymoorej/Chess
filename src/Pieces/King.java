@@ -58,4 +58,16 @@ public class King extends Piece implements IHasMoved{
     public void setPieceMoved() {
         hasMoved = true;
     }
+
+    @Override
+    protected String getPieceName() {
+        return "king";
+    }
+
+    @Override
+    public String toString() {
+        return "King{" +
+                "colour=" + colour +
+                '}';
+    }
 }

@@ -1,6 +1,6 @@
 package Board;
 
-import Exceptions.IllegalMoveException;
+import Enums.XPosition;
 import Pieces.*;
 
 public class Board {
@@ -67,27 +67,6 @@ public class Board {
         for (int i = 0; i < xSize; i++){
             squares[i][1].setPiece(new Pawn(Colour.WHITE));
             squares[i][6].setPiece(new Pawn(Colour.BLACK));
-        }
-    }
-
-    public boolean canMove(Piece piece, Square start, Square end){
-        if (!piece.isMoveValid(start.getBoardPosition(), end.getBoardPosition())){
-            return false;
-        }
-
-        if (piece.canJumpOverPieces()){
-
-        }
-        else{
-
-        }
-
-        return true;
-    }
-
-    public void move(Piece piece, Square start, Square end){
-        if (!canMove(piece, start, end)){
-            throw new IllegalMoveException();
         }
     }
 

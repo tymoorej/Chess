@@ -42,4 +42,15 @@ public class Bishop extends Piece {
         return colour;
     }
 
+    @Override
+    protected String getPieceName() {
+        return "bishop";
+    }
+
+    @Override
+    public String toString() {
+        return "Bishop{" +
+                "colour=" + colour +
+                '}';
+    }
 }

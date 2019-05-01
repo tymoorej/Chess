@@ -2,7 +2,7 @@ package Tests;
 
 import Board.BoardPosition;
 import Board.Distance2D;
-import Board.XPosition;
+import Enums.XPosition;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

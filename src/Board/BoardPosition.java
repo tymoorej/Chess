@@ -1,5 +1,6 @@
 package Board;
 
+import Enums.XPosition;
 import Exceptions.IllegalPositionException;
 
 public class BoardPosition {

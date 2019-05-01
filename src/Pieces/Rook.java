@@ -54,4 +54,16 @@ public class Rook extends Piece implements IHasMoved{
     public void setPieceMoved() {
         hasMoved = true;
     }
+
+    @Override
+    protected String getPieceName() {
+        return "rook";
+    }
+
+    @Override
+    public String toString() {
+        return "Rook{" +
+                "colour=" + colour +
+                '}';
+    }
 }

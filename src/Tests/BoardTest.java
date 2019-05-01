@@ -2,7 +2,7 @@ package Tests;
 
 import Board.Board;
 import Board.Square;
-import Board.XPosition;
+import Enums.XPosition;
 import Pieces.*;
 import org.junit.jupiter.api.Test;
 

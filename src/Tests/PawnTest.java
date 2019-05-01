@@ -1,7 +1,7 @@
 package Tests;
 
 import Board.BoardPosition;
-import Board.XPosition;
+import Enums.XPosition;
 import Pieces.Colour;
 import Pieces.Pawn;
 import org.junit.jupiter.api.Test;
