@@ -1,7 +1,7 @@
 package Tests;
 
-import Board.BoardPosition;
-import Board.Distance2D;
+import BoardHelpers.BoardPosition;
+import BoardHelpers.Distance2D;
 import Enums.XPosition;
 import org.junit.jupiter.api.Test;
 

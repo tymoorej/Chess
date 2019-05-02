@@ -1,12 +1,12 @@
 package UI;
 
-import Board.Board;
-import Board.Square;
-import Board.BoardPosition;
+import BoardHelpers.Board;
+import BoardHelpers.Square;
+import BoardHelpers.BoardPosition;
+import Moves.PieceMover;
 import Pieces.Piece;
 
 import java.awt.*;
-import java.awt.image.ImageObserver;
 
 public class BoardDrawableRectangle{
     private int xStart;
@@ -17,10 +17,11 @@ public class BoardDrawableRectangle{
     private int yEnd;
 
     private BoardPosition position;
-    private Color color;
+    private Color innerColor;
+    private Color outerColor;
 
     public BoardDrawableRectangle(int xStart, int xSize, int xEnd, int yStart, int ySize, int yEnd,
-                                  BoardPosition position, Color color) {
+                                  BoardPosition position, Color innerColor) {
         this.xStart = xStart;
         this.xSize = xSize;
         this.xEnd = xEnd;
@@ -28,28 +29,65 @@ public class BoardDrawableRectangle{
         this.ySize = ySize;
         this.yEnd = yEnd;
         this.position = position;
-        this.color = color;
+        this.innerColor = innerColor;
+        this.outerColor = innerColor;
     }
 
-    public void draw(Graphics g){
-        g.setColor(color);
-        g.fillRect(xStart, yStart, xSize, ySize);
+    public void draw(Graphics graphics){
+
+        graphics.setColor(outerColor);
+        graphics.fillRect(xStart, yStart, xSize, ySize);
+
+        graphics.setColor(innerColor);
+        graphics.fillRect(xStart + 5, yStart + 5, xSize - 10, ySize - 10);
     }
 
-    public void displayLabel(Graphics g){
-        g.drawString(position.getxPosition().name() + "-" + position.getyPosition(),
+    public void displayLabel(Graphics graphics){
+        graphics.drawString(position.getxPosition().name() + "-" + position.getyPosition(),
                 xStart + xSize/2, yStart + ySize/2);
     }
 
-    public void drawPiece(Graphics g, Board board){
-        Square square = board.getSquare(position);
+    public void drawPiece(Graphics graphics){
+        Square square = Board.getInstance().getSquare(position);
         Piece piece = square.getPiece();
         if (!square.isEmpty()){
             Image image = piece.getImage();
             if (image != null){
-                g.drawImage(image,xStart, yStart, xSize, ySize, null);
+                graphics.drawImage(image,xStart, yStart, xSize, ySize, null);
             }
         }
+    }
+
+    public void highlight(BoardDrawableRectangle[][] boardDrawableRectangles){
+        outerColor = Color.RED;
+        showPossibilites(boardDrawableRectangles);
+    }
+
+    public void subHighlight(){
+        outerColor = Color.GREEN;
+    }
+
+    private void showPossibilites(BoardDrawableRectangle[][] boardDrawableRectangles) {
+        Square square = Board.getInstance().getSquare(position);
+
+        if (square.isEmpty()){
+            return;
+        }
+        BoardDrawableRectangle currentRectangle;
+        Square currentSquare;
+        for (int i = 0; i < boardDrawableRectangles.length; i++) {
+            for (int j = 0; j < boardDrawableRectangles[i].length; j++) {
+                currentRectangle = boardDrawableRectangles[i][j];
+                currentSquare =  Board.getInstance().getSquare(currentRectangle.position);
+                if (PieceMover.canMove(square, currentSquare)){
+                    currentRectangle.subHighlight();
+                }
+            }
+        }
+    }
+
+    public void unHighlight() {
+        outerColor = innerColor;
     }
 
     public static BoardDrawableRectangle getRectangleClicked(BoardDrawableRectangle[][] boardDrawableRectangles, int xPos, int yPos){
@@ -67,6 +105,7 @@ public class BoardDrawableRectangle{
 
         return null;
     }
+
 
     public int getxStart() {
         return xStart;
@@ -124,11 +163,12 @@ public class BoardDrawableRectangle{
         this.position = position;
     }
 
-    public Color getColor() {
-        return color;
+    public Color getInnerColor() {
+        return innerColor;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setInnerColor(Color innerColor) {
+        this.innerColor = innerColor;
     }
+
 }

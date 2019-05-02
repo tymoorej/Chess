@@ -1,6 +1,6 @@
 package Tests;
 
-import Board.BoardPosition;
+import BoardHelpers.BoardPosition;
 import Enums.XPosition;
 import Pieces.Colour;
 import Pieces.Pawn;

@@ -1,7 +1,7 @@
 package Tests;
 
-import Board.Board;
-import Board.Square;
+import BoardHelpers.Board;
+import BoardHelpers.Square;
 import Enums.XPosition;
 import Pieces.*;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ class BoardTest {
 
     @Test
     public void constructorTest(){
-        Board board = new Board();
+        Board board = Board.getInstance();
         Square[][] squares = board.getSquares();
 
         for (int i = 0; i < board.xSize; i++){

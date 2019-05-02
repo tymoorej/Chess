@@ -1,6 +1,6 @@
 package Tests;
 
-import Board.BoardPosition;
+import BoardHelpers.BoardPosition;
 import Enums.XPosition;
 import Pieces.Colour;
 import Pieces.King;
@@ -37,5 +37,11 @@ class KingTest {
         assertTrue(king.isMoveValid(start, end8));
         assertTrue(king.isMoveValid(start, end9));
         assertFalse(king.isMoveValid(start, end10));
+
+        King blackKing = new King(Colour.BLACK);
+        BoardPosition start2 = new BoardPosition(XPosition.E, 8);
+        BoardPosition end11 = new BoardPosition(XPosition.D, 6);
+
+        assertFalse(blackKing.isMoveValid(start2,end11));
     }
 }

@@ -1,4 +1,4 @@
-package Board;
+package BoardHelpers;
 
 import Pieces.Piece;
 

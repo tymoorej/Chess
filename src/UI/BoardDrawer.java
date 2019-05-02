@@ -1,8 +1,10 @@
 package UI;
 
-import Board.Board;
-import Board.BoardPosition;
+import BoardHelpers.Board;
+import BoardHelpers.BoardPosition;
+import Enums.GameState;
 import Enums.XPosition;
+import GameHandlers.Game;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,11 +30,10 @@ public class BoardDrawer extends JPanel {
 
     private BoardDrawableRectangle[][] boardDrawableRectangles;
 
-    private Board board;
 
 
 
-    public BoardDrawer(BoardDrawableRectangle[][] boardDrawableRectangles, Board board) {
+    public BoardDrawer(BoardDrawableRectangle[][] boardDrawableRectangles) {
         totalHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
         totalWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
 
@@ -49,7 +50,24 @@ public class BoardDrawer extends JPanel {
         boardYSectionSize = boardHieght / boardYSections;
 
         this.boardDrawableRectangles = boardDrawableRectangles;
-        this.board = board;
+
+        Color c;
+        for (int i = 0; i < boardXSections; i++) {
+            for (int j = 0; j < boardYSections; j++) {
+                if ((i + j) % 2 == 1) {
+                    c = Color.gray;
+                } else {
+                    c = Color.WHITE;
+                }
+
+                boardDrawableRectangles[i][j] = new BoardDrawableRectangle(boardStartX + i * boardXSectionSize,
+                        boardXSectionSize, boardStartX + i * boardXSectionSize + boardXSectionSize - 1,
+                        boardStartY + j * boardYSectionSize, boardYSectionSize,
+                        boardStartY + j * boardYSectionSize + boardYSectionSize, new BoardPosition(XPosition.values()[i], 8 - j),
+                        c);
+            }
+        }
+
     }
 
 
@@ -58,21 +76,8 @@ public class BoardDrawer extends JPanel {
         super.paintComponent(g);
         this.setBackground(new Color(200, 200, 200));
 
-        Color c;
         for (int i = 0; i < boardXSections; i++){
             for (int j = 0; j < boardYSections; j++){
-                if ((i + j) % 2 == 1){
-                    c = Color.gray;
-                }
-                else{
-                    c = Color.WHITE;
-                }
-
-                boardDrawableRectangles[i][j] = new BoardDrawableRectangle(boardStartX + i*boardXSectionSize,
-                        boardXSectionSize, boardStartX + i*boardXSectionSize + boardXSectionSize - 1,
-                        boardStartY + j*boardYSectionSize, boardYSectionSize,
-                        boardStartY + j*boardYSectionSize + boardYSectionSize, new BoardPosition(XPosition.values()[i], 8 - j),
-                        c);
                 boardDrawableRectangles[i][j].draw(g);
             }
         }
@@ -96,11 +101,18 @@ public class BoardDrawer extends JPanel {
 
         g.setColor(Color.BLACK);
         g.setFont(new Font("Title", Font.BOLD, 50));
-        g.drawString("White Turn", 20, 60);
+
+        if (Game.getInstance().getState() == GameState.WHITE_TURN){
+            g.drawString("White Turn", 20, 60);
+        }
+        else if(Game.getInstance().getState() == GameState.BLACK_TURN){
+            g.drawString("Black Turn", 20, 60);
+        }
+
 
         for (int i = 0; i < boardXSections; i++){
             for (int j = 0; j < boardYSections; j++){
-                boardDrawableRectangles[i][j].drawPiece(g, board);
+                boardDrawableRectangles[i][j].drawPiece(g);
             }
         }
 

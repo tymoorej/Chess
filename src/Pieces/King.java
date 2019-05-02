@@ -1,7 +1,7 @@
 package Pieces;
 
-import Board.BoardPosition;
-import Board.Distance2D;
+import BoardHelpers.BoardPosition;
+import BoardHelpers.Distance2D;
 
 public class King extends Piece implements IHasMoved{
     private static final int value = 100;
@@ -27,11 +27,11 @@ public class King extends Piece implements IHasMoved{
             return false;
         }
 
-        if (distance.getyDistance() > 1){
+        if (Math.abs(distance.getyDistance()) > 1){
             return false;
         }
 
-        if (distance.getxDistance() > 1){
+        if (Math.abs(distance.getxDistance()) > 1){
             return false;
         }
 

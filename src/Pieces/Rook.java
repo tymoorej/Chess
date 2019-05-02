@@ -1,7 +1,7 @@
 package Pieces;
 
-import Board.BoardPosition;
-import Board.Distance2D;
+import BoardHelpers.BoardPosition;
+import BoardHelpers.Distance2D;
 
 public class Rook extends Piece implements IHasMoved{
     private static final int value = 5;

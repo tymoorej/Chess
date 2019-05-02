@@ -1,4 +1,4 @@
-package Board;
+package BoardHelpers;
 
 import Enums.XPosition;
 import Pieces.*;
@@ -8,7 +8,13 @@ public class Board {
     public static final int ySize = 8;
     private Square[][] squares;
 
-    public Board() {
+    private static Board ourInstance = new Board();
+
+    public static Board getInstance() {
+        return ourInstance;
+    }
+
+    private Board() {
         squares = new Square[xSize][ySize];
 
         for (int i = 0; i < xSize; i++){

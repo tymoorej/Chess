@@ -1,7 +1,7 @@
 package Pieces;
 
-import Board.BoardPosition;
-import Board.Distance2D;
+import BoardHelpers.BoardPosition;
+import BoardHelpers.Distance2D;
 
 public class Bishop extends Piece {
     private static final int value = 3;

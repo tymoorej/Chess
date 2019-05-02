@@ -1,6 +1,6 @@
 package Pieces;
 
-import Board.BoardPosition;
+import BoardHelpers.BoardPosition;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

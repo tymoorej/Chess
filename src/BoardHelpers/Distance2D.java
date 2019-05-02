@@ -1,4 +1,4 @@
-package Board;
+package BoardHelpers;
 
 public class Distance2D {
     private int xDistance;

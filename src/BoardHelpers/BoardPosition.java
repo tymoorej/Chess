@@ -1,4 +1,4 @@
-package Board;
+package BoardHelpers;
 
 import Enums.XPosition;
 import Exceptions.IllegalPositionException;
