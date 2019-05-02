@@ -11,6 +11,9 @@ import Pieces.IHasMoved;
 import Pieces.King;
 import Pieces.Pawn;
 import Pieces.Piece;
+import Players.Player;
+
+import java.util.ArrayList;
 
 
 public class PieceMover {
@@ -20,11 +23,11 @@ public class PieceMover {
             throw new IllegalMoveException();
         }
 
-//        if (!end.isEmpty()){
-//            if (end.getPiece() instanceof King){
-//                Game.getInstance().setGameOver();
-//            }
-//        }
+        if (!end.isEmpty()){
+            if (end.getPiece() instanceof King){
+                Game.getInstance().setGameOver();
+            }
+        }
 
         end.setPiece(start.getPiece());
         start.setPiece(null);
@@ -153,6 +156,36 @@ public class PieceMover {
         }
 
         return true;
+    }
+
+    public static ArrayList<Move> getAvailableMoves(Player player){
+        ArrayList<Move> moves = new ArrayList<>();
+
+        Square start, end;
+        for (int i = 0; i < Board.xSize; i++){
+            for (int j = 0; j < Board.ySize; j++){
+                start = Board.getInstance().getSquare(new BoardPosition(XPosition.values()[i], j+1));
+                for (int k = 0; k < Board.xSize; k++){
+                    for (int l = 0; l < Board.ySize; l++){
+                        end = Board.getInstance().getSquare(new BoardPosition(XPosition.values()[k], l+1));
+
+                        if (start.isEmpty()){
+                            continue;
+                        }
+
+                        if (!start.getPiece().getColour().equals(player.getColour())){
+                            continue;
+                        }
+
+                        if (canMove(start,end)){
+                            moves.add(new Move(start, end));
+                        }
+                    }
+                }
+            }
+        }
+
+        return  moves;
     }
 
 }

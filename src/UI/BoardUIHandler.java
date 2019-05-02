@@ -47,6 +47,8 @@ public class BoardUIHandler {
 
     public static void makeHumanTurn(Human human){
 
+        updateBoard();
+
         if (humanMouseListner != null){
             boardDrawer.removeMouseListener(humanMouseListner);
         }

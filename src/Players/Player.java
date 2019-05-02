@@ -33,8 +33,8 @@ public abstract class Player {
 
     public abstract void takeTurn();
 
-    public void waitUntilTurn(){
-        while(!isPlayersTurn()){
+    public void waitUntilTurnDone(){
+        while(isPlayersTurn()){
             try {
                 sleep(50);
             } catch (InterruptedException e) {

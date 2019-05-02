@@ -3,8 +3,12 @@ package Players;
 import BoardHelpers.Board;
 import BoardHelpers.BoardPosition;
 import Enums.XPosition;
+import GameHandlers.Game;
+import Moves.Move;
 import Moves.PieceMover;
 import Pieces.Colour;
+
+import java.util.ArrayList;
 
 public class Bot extends Player {
 
@@ -14,9 +18,17 @@ public class Bot extends Player {
 
     @Override
     public void takeTurn() {
-        waitUntilTurn();
-        PieceMover.move(Board.getInstance().getSquare(new BoardPosition(XPosition.D,7)),Board.getInstance().getSquare(new BoardPosition(XPosition.D,6)));
-        System.out.println("BOT DONE");
+        ArrayList<Move> moves = PieceMover.getAvailableMoves(this);
+
+        if (moves.size() == 0){
+            Game.getInstance().setGameOver();
+            return;
+        }
+
+        Move move = moves.get((int) (Math.random() * moves.size()));
+
+        PieceMover.move(move.getStart(), move.getEnd());
+        waitUntilTurnDone();
     }
 
 }
