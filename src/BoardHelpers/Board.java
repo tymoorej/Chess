@@ -1,9 +1,14 @@
 package BoardHelpers;
 
 import Enums.XPosition;
+import GameHandlers.Game;
+import Moves.Move;
+import Moves.PieceMover;
 import Pieces.*;
 
-public class Board {
+import java.util.ArrayList;
+
+public class Board implements Copyable<Board>{
     public static final int xSize = 8;
     public static final int ySize = 8;
     private Square[][] squares;
@@ -24,6 +29,10 @@ public class Board {
         }
 
         placePieces();
+    }
+
+    private Board(Square[][] squares){
+        this.squares = squares;
     }
 
     private void placePieces(){
@@ -82,5 +91,39 @@ public class Board {
 
     public Square getSquare(BoardPosition position){
         return squares[position.getxPosition().ordinal()][position.getyPosition() - 1];
+    }
+
+    public void updateColourInCheck(){
+        ArrayList<Move> whiteMoves = PieceMover.getAvailableMoves(Colour.WHITE);
+        ArrayList<Move> blackMoves = PieceMover.getAvailableMoves(Colour.BLACK);
+
+        Piece piece;
+        for (Move move : whiteMoves){
+            if (!move.getEnd().isEmpty()){
+                piece = move.getEnd().getPiece();
+                if (piece instanceof King && piece.getColour().equals(Colour.BLACK)){
+                    Game.getInstance().setInCheck(Colour.BLACK);
+                    return;
+                }
+            }
+        }
+
+        for (Move move : blackMoves){
+            if (!move.getEnd().isEmpty()){
+                piece = move.getEnd().getPiece();
+                if (piece instanceof King && piece.getColour().equals(Colour.WHITE)){
+                    Game.getInstance().setInCheck(Colour.WHITE);
+                    return;
+                }
+            }
+        }
+
+        Game.getInstance().setInCheck(null);
+
+    }
+
+    @Override
+    public Board getCopy() {
+        return null;
     }
 }

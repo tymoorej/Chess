@@ -52,9 +52,7 @@ public class BoardUIHandler {
         if (humanMouseListner != null){
             boardDrawer.removeMouseListener(humanMouseListner);
         }
-        else{
-            createMouseListner(human);
-        }
+        createMouseListner(human);
         boardDrawer.addMouseListener(humanMouseListner);
     }
 
@@ -66,7 +64,6 @@ public class BoardUIHandler {
                     BoardDrawableRectangle clickedOn = BoardDrawableRectangle.getRectangleClicked(boardDrawableRectangles, e.getX(), e.getY());
                     if (clickedOn != null && human.isPlayersTurn()){
                         removeHighlights();
-                        System.out.println(clickedOn.getPosition().getxPosition() + "," + clickedOn.getPosition().getyPosition());
 
                         Square square = Board.getInstance().getSquare(clickedOn.getPosition());
 

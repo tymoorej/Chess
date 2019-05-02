@@ -3,7 +3,7 @@ package BoardHelpers;
 import Enums.XPosition;
 import Exceptions.IllegalPositionException;
 
-public class BoardPosition {
+public class BoardPosition implements Copyable<BoardPosition>{
     private XPosition xPosition;
     private Integer yPosition;
 
@@ -42,5 +42,10 @@ public class BoardPosition {
         int deltaX = otherPosition.getxPosition().ordinal() - this.getxPosition().ordinal();
         int deltaY = otherPosition.getyPosition() - this.getyPosition();
         return new Distance2D(deltaX, deltaY);
+    }
+
+    @Override
+    public BoardPosition getCopy() {
+        return null;
     }
 }

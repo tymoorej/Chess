@@ -6,6 +6,7 @@ import BoardHelpers.Square;
 import Enums.GameState;
 import Enums.XPosition;
 import Exceptions.UnexpectedStateException;
+import Pieces.Colour;
 import Pieces.King;
 import Players.Player;
 
@@ -14,6 +15,7 @@ import static java.lang.Thread.sleep;
 public class Game {
     private GameState state;
     private boolean gameOver;
+    private Colour inCheck;
 
     private static Game ourInstance = new Game();
 
@@ -24,6 +26,7 @@ public class Game {
     public Game() {
         state = GameState.WHITE_TURN;
         gameOver = false;
+        inCheck = null;
     }
 
     public GameState getState() {
@@ -43,7 +46,7 @@ public class Game {
         }
     }
 
-    public Player GameLoop(Player player1, Player player2){
+    public Player GameLoop(Player player1, Player player2, int delay) throws InterruptedException {
         state = GameState.WHITE_TURN;
 
         while (!gameOver){
@@ -53,7 +56,12 @@ public class Game {
                 break;
             }
 
+            sleep(delay);
+
             player2.takeTurn();
+
+            sleep(delay);
+
         }
 
         return getWinner(player1, player2);
@@ -100,4 +108,11 @@ public class Game {
         gameOver = true;
     }
 
+    public Colour getInCheck() {
+        return inCheck;
+    }
+
+    public void setInCheck(Colour inCheck) {
+        this.inCheck = inCheck;
+    }
 }

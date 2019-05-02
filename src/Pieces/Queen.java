@@ -57,4 +57,9 @@ public class Queen extends Piece {
                 "colour=" + colour +
                 '}';
     }
+
+    @Override
+    public Piece getCopy() {
+        return null;
+    }
 }

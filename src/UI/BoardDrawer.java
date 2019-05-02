@@ -5,6 +5,7 @@ import BoardHelpers.BoardPosition;
 import Enums.GameState;
 import Enums.XPosition;
 import GameHandlers.Game;
+import Pieces.Colour;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +44,7 @@ public class BoardDrawer extends JPanel {
         xSectionSize = totalWidth / xSections;
         ySectionSize = totalHeight / ySections;
         boardStartX = 10 * xSectionSize;
-        boardStartY = 10 * ySectionSize;
+        boardStartY = 12 * ySectionSize;
         boardWidth = 10 * boardXSections * xSectionSize;
         boardHieght = 10 * boardYSections * ySectionSize;
         boardXSectionSize = boardWidth / boardXSections;
@@ -116,6 +117,14 @@ public class BoardDrawer extends JPanel {
             }
         }
 
+        g.setColor(Color.RED);
+        g.setFont(new Font("Check", Font.BOLD, 50));
+
+        Colour colourInCheck = Game.getInstance().getInCheck();
+
+        if (colourInCheck != null){
+            g.drawString(colourInCheck.name() + " in check", totalWidth/2 - 200, 60);
+        }
 
 
     }

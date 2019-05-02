@@ -53,4 +53,9 @@ public class Knight extends Piece {
                 "colour=" + colour +
                 '}';
     }
+
+    @Override
+    public Piece getCopy() {
+        return null;
+    }
 }

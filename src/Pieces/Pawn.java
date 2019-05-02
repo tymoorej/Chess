@@ -74,4 +74,9 @@ public class Pawn extends Piece implements IHasMoved{
                 "colour=" + colour +
                 '}';
     }
+
+    @Override
+    public Piece getCopy() {
+        return null;
+    }
 }

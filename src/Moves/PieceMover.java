@@ -7,10 +7,7 @@ import BoardHelpers.Square;
 import Enums.XPosition;
 import Exceptions.IllegalMoveException;
 import GameHandlers.Game;
-import Pieces.IHasMoved;
-import Pieces.King;
-import Pieces.Pawn;
-import Pieces.Piece;
+import Pieces.*;
 import Players.Player;
 
 import java.util.ArrayList;
@@ -158,7 +155,7 @@ public class PieceMover {
         return true;
     }
 
-    public static ArrayList<Move> getAvailableMoves(Player player){
+    public static ArrayList<Move> getAvailableMoves(Colour colour){
         ArrayList<Move> moves = new ArrayList<>();
 
         Square start, end;
@@ -173,7 +170,7 @@ public class PieceMover {
                             continue;
                         }
 
-                        if (!start.getPiece().getColour().equals(player.getColour())){
+                        if (!start.getPiece().getColour().equals(colour)){
                             continue;
                         }
 

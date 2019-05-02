@@ -2,7 +2,7 @@ package BoardHelpers;
 
 import Pieces.Piece;
 
-public class Square {
+public class Square implements Copyable<Square>{
     private BoardPosition boardPosition;
     private Piece piece;
 
@@ -28,5 +28,10 @@ public class Square {
 
     public boolean isEmpty(){
         return piece == null;
+    }
+
+    @Override
+    public Square getCopy() {
+        return null;
     }
 }

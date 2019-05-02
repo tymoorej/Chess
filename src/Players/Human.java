@@ -6,18 +6,13 @@ import Pieces.Colour;
 import UI.BoardUIHandler;
 
 public class Human extends Player{
-    public Human() {
-        setColour(Colour.WHITE);
+    public Human(Colour colour) {
+        setColour(colour);
+        addPlayer(this);
     }
 
     @Override
-    public void takeTurn() {
-        if (PieceMover.getAvailableMoves(this).size() == 0){
-            Game.getInstance().setGameOver();
-            return;
-        }
-
+    public void makeMove() {
         BoardUIHandler.makeHumanTurn(this);
-        waitUntilTurnDone();
     }
 }

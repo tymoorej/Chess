@@ -1,12 +1,13 @@
 package Pieces;
 
 import BoardHelpers.BoardPosition;
+import BoardHelpers.Copyable;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public abstract class Piece{
+public abstract class Piece implements Copyable<Piece> {
     public abstract int getValue();
     public abstract boolean isMoveValid(BoardPosition start, BoardPosition end);
     public abstract boolean canJumpOverPieces();

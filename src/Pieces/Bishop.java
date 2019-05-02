@@ -53,4 +53,9 @@ public class Bishop extends Piece {
                 "colour=" + colour +
                 '}';
     }
+
+    @Override
+    public Piece getCopy() {
+        return null;
+    }
 }
