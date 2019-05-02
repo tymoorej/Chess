@@ -10,6 +10,11 @@ public class Square implements Copyable<Square>{
         this.boardPosition = boardPosition;
     }
 
+    public Square(BoardPosition boardPosition, Piece piece) {
+        this.boardPosition = boardPosition;
+        this.piece = piece;
+    }
+
     public BoardPosition getBoardPosition() {
         return boardPosition;
     }
@@ -32,6 +37,10 @@ public class Square implements Copyable<Square>{
 
     @Override
     public Square getCopy() {
-        return null;
+        if (isEmpty()){
+            return new Square(boardPosition.getCopy(), null);
+        }
+
+        return new Square(boardPosition.getCopy(), piece.getCopy());
     }
 }

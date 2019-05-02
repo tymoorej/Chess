@@ -60,6 +60,6 @@ public class Queen extends Piece {
 
     @Override
     public Piece getCopy() {
-        return null;
+        return new Queen(colour);
     }
 }

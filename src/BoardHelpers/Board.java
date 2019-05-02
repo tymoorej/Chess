@@ -3,7 +3,6 @@ package BoardHelpers;
 import Enums.XPosition;
 import GameHandlers.Game;
 import Moves.Move;
-import Moves.PieceMover;
 import Pieces.*;
 
 import java.util.ArrayList;
@@ -93,37 +92,38 @@ public class Board implements Copyable<Board>{
         return squares[position.getxPosition().ordinal()][position.getyPosition() - 1];
     }
 
-    public void updateColourInCheck(){
-        ArrayList<Move> whiteMoves = PieceMover.getAvailableMoves(Colour.WHITE);
-        ArrayList<Move> blackMoves = PieceMover.getAvailableMoves(Colour.BLACK);
+    public boolean isColourInCheck(Colour colour){
+        Colour opposingColour;
+        if (colour == Colour.WHITE){
+            opposingColour = Colour.BLACK;
+        }
+        else{
+            opposingColour = Colour.WHITE;
+        }
+        ArrayList<Move> moves = Move.getAvailableMoves(opposingColour, false, this);
 
         Piece piece;
-        for (Move move : whiteMoves){
+        for (Move move : moves){
             if (!move.getEnd().isEmpty()){
                 piece = move.getEnd().getPiece();
-                if (piece instanceof King && piece.getColour().equals(Colour.BLACK)){
-                    Game.getInstance().setInCheck(Colour.BLACK);
-                    return;
+                if (piece instanceof King && piece.getColour().equals(colour)){
+                    return true;
                 }
             }
         }
 
-        for (Move move : blackMoves){
-            if (!move.getEnd().isEmpty()){
-                piece = move.getEnd().getPiece();
-                if (piece instanceof King && piece.getColour().equals(Colour.WHITE)){
-                    Game.getInstance().setInCheck(Colour.WHITE);
-                    return;
-                }
-            }
-        }
-
-        Game.getInstance().setInCheck(null);
-
+        return false;
     }
 
     @Override
     public Board getCopy() {
-        return null;
+        Square[][] squaresCopy = new Square[xSize][ySize];
+        for (int i = 0; i < xSize; i++){
+            for (int j = 0; j < ySize; j++) {
+                squaresCopy[i][j] = squares[i][j].getCopy();
+            }
+        }
+
+        return new Board(squaresCopy);
     }
 }

@@ -2,7 +2,7 @@ package UI;
 
 import BoardHelpers.Board;
 import BoardHelpers.Square;
-import Moves.PieceMover;
+import Moves.Move;
 import Players.Human;
 
 import javax.swing.*;
@@ -81,8 +81,9 @@ public class BoardUIHandler {
                             squareSelected = square;
                         }
                         else{
-                            if (PieceMover.canMove(squareSelected, square)){
-                                PieceMover.move(squareSelected, square);
+                            Move move = new Move(squareSelected, square);
+                            if (move.canMove(true, Board.getInstance())){
+                                move.doMove(true);
                             }
                             squareSelected = null;
                         }

@@ -1,7 +1,5 @@
 package Players;
 
-import GameHandlers.Game;
-import Moves.PieceMover;
 import Pieces.Colour;
 import UI.BoardUIHandler;
 

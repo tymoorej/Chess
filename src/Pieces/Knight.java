@@ -56,6 +56,6 @@ public class Knight extends Piece {
 
     @Override
     public Piece getCopy() {
-        return null;
+        return new Knight(colour);
     }
 }

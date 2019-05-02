@@ -6,7 +6,7 @@ import Exceptions.AttemptingToPlayWithDeltedPlayerException;
 import Exceptions.ColourIsAlreadySetException;
 import Exceptions.TooManyPlayersException;
 import Exceptions.TooManyPlayersWithTheSameColourException;
-import Moves.PieceMover;
+import Moves.Move;
 import Pieces.Colour;
 import GameHandlers.Game;
 import UI.BoardUIHandler;
@@ -57,12 +57,11 @@ public abstract class Player {
 
         makeMove();
         waitUntilTurnDone();
-        Board.getInstance().updateColourInCheck();
         BoardUIHandler.updateBoard();
     }
 
     public boolean canMove(){
-        if (PieceMover.getAvailableMoves(this.getColour()).size() == 0){
+        if (Move.getAvailableMoves(this.getColour(), true, Board.getInstance()).size() == 0){
             Game.getInstance().setGameOver();
             return false;
         }
@@ -101,7 +100,7 @@ public abstract class Player {
     }
 
     public boolean isInCheck(){
-        return getColour().equals(Game.getInstance().getInCheck());
+        return Board.getInstance().isColourInCheck(getColour());
     }
 
 }

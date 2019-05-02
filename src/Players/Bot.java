@@ -1,8 +1,7 @@
 package Players;
 
-import GameHandlers.Game;
+import BoardHelpers.Board;
 import Moves.Move;
-import Moves.PieceMover;
 import Pieces.Colour;
 
 import java.util.ArrayList;
@@ -16,9 +15,9 @@ public class Bot extends Player {
 
     @Override
     public void makeMove() {
-        ArrayList<Move> moves = PieceMover.getAvailableMoves(this.getColour());
+        ArrayList<Move> moves = Move.getAvailableMoves(this.getColour(), true, Board.getInstance());
         Move move = moves.get((int) (Math.random() * moves.size()));
-        PieceMover.move(move.getStart(), move.getEnd());
+        move.doMove(true);
     }
 
 }

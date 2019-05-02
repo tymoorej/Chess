@@ -14,6 +14,11 @@ public class King extends Piece implements IHasMoved{
         hasMoved = false;
     }
 
+    public King(Colour colour, boolean hasMoved) {
+        this.colour = colour;
+        this.hasMoved = hasMoved;
+    }
+
     @Override
     public int getValue() {
         return value;
@@ -73,6 +78,6 @@ public class King extends Piece implements IHasMoved{
 
     @Override
     public Piece getCopy() {
-        return null;
+        return new King(colour, hasMoved);
     }
 }

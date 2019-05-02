@@ -14,6 +14,11 @@ public class Pawn extends Piece implements IHasMoved{
         hasMoved = false;
     }
 
+    public Pawn(Colour colour, boolean hasMoved) {
+        this.colour = colour;
+        this.hasMoved = hasMoved;
+    }
+
     @Override
     public int getValue() {
         return value;
@@ -77,6 +82,6 @@ public class Pawn extends Piece implements IHasMoved{
 
     @Override
     public Piece getCopy() {
-        return null;
+        return new Pawn(colour, hasMoved);
     }
 }

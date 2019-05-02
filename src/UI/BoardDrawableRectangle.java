@@ -3,7 +3,7 @@ package UI;
 import BoardHelpers.Board;
 import BoardHelpers.Square;
 import BoardHelpers.BoardPosition;
-import Moves.PieceMover;
+import Moves.Move;
 import Pieces.Piece;
 
 import java.awt.*;
@@ -75,11 +75,14 @@ public class BoardDrawableRectangle{
         }
         BoardDrawableRectangle currentRectangle;
         Square currentSquare;
+        Move move;
         for (int i = 0; i < boardDrawableRectangles.length; i++) {
             for (int j = 0; j < boardDrawableRectangles[i].length; j++) {
                 currentRectangle = boardDrawableRectangles[i][j];
                 currentSquare =  Board.getInstance().getSquare(currentRectangle.position);
-                if (PieceMover.canMove(square, currentSquare)){
+
+                move = new Move(square, currentSquare);
+                if (move.canMove(true, Board.getInstance())){
                     currentRectangle.subHighlight();
                 }
             }

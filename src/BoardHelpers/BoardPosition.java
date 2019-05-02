@@ -46,6 +46,6 @@ public class BoardPosition implements Copyable<BoardPosition>{
 
     @Override
     public BoardPosition getCopy() {
-        return null;
+        return new BoardPosition(xPosition, yPosition);
     }
 }

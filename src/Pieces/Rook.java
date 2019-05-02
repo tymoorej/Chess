@@ -14,6 +14,11 @@ public class Rook extends Piece implements IHasMoved{
         hasMoved = false;
     }
 
+    public Rook(Colour colour, boolean hasMoved) {
+        this.colour = colour;
+        this.hasMoved = hasMoved;
+    }
+
     @Override
     public int getValue() {
         return value;
@@ -69,6 +74,6 @@ public class Rook extends Piece implements IHasMoved{
 
     @Override
     public Piece getCopy() {
-        return null;
+        return new Rook(colour, hasMoved);
     }
 }

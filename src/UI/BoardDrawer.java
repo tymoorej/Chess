@@ -118,12 +118,24 @@ public class BoardDrawer extends JPanel {
         }
 
         g.setColor(Color.RED);
-        g.setFont(new Font("Check", Font.BOLD, 50));
+        g.setFont(new Font("Check/Winner", Font.BOLD, 50));
 
-        Colour colourInCheck = Game.getInstance().getInCheck();
+        if (Game.getInstance().isGameOver()){
+            if (Game.getInstance().getWinningColour() == null){
+                g.drawString("Stalemate", totalWidth/2 - 200, 60);
+            }
+            else{
+                g.drawString(Game.getInstance().getWinningColour().name() + " Wins!", totalWidth/2 - 200, 60);
+            }
 
-        if (colourInCheck != null){
-            g.drawString(colourInCheck.name() + " in check", totalWidth/2 - 200, 60);
+            return;
+        }
+
+        if (Board.getInstance().isColourInCheck(Colour.WHITE)){
+            g.drawString("White in check", totalWidth/2 - 200, 60);
+        }
+        else if (Board.getInstance().isColourInCheck(Colour.BLACK)){
+            g.drawString("Black in check", totalWidth/2 - 200, 60);
         }
 
 
