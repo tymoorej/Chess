@@ -14,7 +14,17 @@ import java.util.Collections;
 
 public class Bot extends Player {
 
-    public Bot(Colour colour) {
+    private NeuralNetwork neuralNetwork;
+    private int id;
+
+    public Bot(Colour colour, int id) {
+        int numberOfHiddenLayers = (int) (Math.random() * 20);
+        int sizeOfHiddenLayers = (int) (Math.random() * 200);
+
+        this.neuralNetwork = new NeuralNetwork(numberOfHiddenLayers, sizeOfHiddenLayers);
+        neuralNetwork.randomizeAllWeigths();
+
+        this.id = id;
         setColour(colour);
         addPlayer(this);
     }
@@ -23,9 +33,7 @@ public class Bot extends Player {
     public void makeMove() {
         ArrayList<Move> moves = Move.getAvailableMoves(this.getColour(), true, Board.getInstance());
 
-        NeuralNetwork neuralNetwork = new NeuralNetwork();
         neuralNetwork.calculateOutputLayer(Board.getInstance());
-
         Node[] nodes = neuralNetwork.getOutputLayer().getNodes();
         OutputNodeIndexCombo[] outputNodeIndexCombos = new OutputNodeIndexCombo[nodes.length];
 
@@ -40,7 +48,7 @@ public class Bot extends Player {
             move = outputNodeIndexCombos[i].convertOutputIndexOfNodeToMove();
             if (moves.contains(move)){
                 move = moves.get(moves.indexOf(move));
-                System.out.println(move.toString());
+                System.out.println(move.toString() + " : " + outputNodeIndexCombos[i].getNode().getValue());
                 move.doMove(true);
                 return;
             }
