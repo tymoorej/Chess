@@ -14,10 +14,15 @@ import java.util.ArrayList;
 public class Move {
     private Square start;
     private Square end;
+    private boolean isCasle;
+    private Rook castledRook;
+    private BoardPosition oldRookPos;
+    private BoardPosition castledRookPos;
 
     public Move(Square start, Square end) {
         this.start = start;
         this.end = end;
+        isCasle = false;
     }
 
     public Square getStart() {
@@ -41,23 +46,32 @@ public class Move {
             throw new IllegalMoveException();
         }
 
-        if (!end.isEmpty()){
-            if (end.getPiece() instanceof King){
-                Game.getInstance().setGameOver();
-            }
-        }
-
-        movePiece();
+        movePiece(end);
 
         if (end.getPiece() instanceof IHasMoved){
             ((IHasMoved) end.getPiece()).setPieceMoved();
         }
 
+        if (isCasle){
+            Board.getInstance().getSquare(castledRookPos).setPiece(castledRook);
+            Board.getInstance().getSquare(oldRookPos).setPiece(null);
+            isCasle = false;
+            castledRook = null;
+            castledRookPos = null;
+            oldRookPos = null;
+        }
+
+
+        if (end.getPiece() instanceof Pawn && (end.getBoardPosition().getyPosition() == 8 ||
+                end.getBoardPosition().getyPosition() == 1)){
+            end.setPiece(new Queen(end.getPiece().getColour()));
+        }
+
         Game.getInstance().flipState();
     }
 
-    private void movePiece(){
-        end.setPiece(start.getPiece());
+    private void movePiece(Square endSquare){
+        endSquare.setPiece(start.getPiece());
         start.setPiece(null);
     }
 
@@ -69,37 +83,127 @@ public class Move {
             return false;
         }
 
-        if (!isEndValid(piece)){
-            return false;
+        if (!isCastleValid(piece, distance, board, checkForCheck)){
+            if (!isEndValid(piece)){
+                return false;
+            }
+
+            if (!piece.canJumpOverPieces()){
+                if (!isDiagonalMoveValid(distance, board)){
+                    return false;
+                }
+
+                if (!isStraightMoveValid(distance, board)){
+                    return false;
+                }
+
+                if (!isPawnMoveValid(piece, distance)){
+                    return false;
+                }
+            }
         }
 
-        if (!piece.canJumpOverPieces()){
-            if (!isDiagonalMoveValid(distance, board)){
-                return false;
-            }
-
-            if (!isStraightMoveValid(distance, board)){
-                return false;
-            }
-
-            if (!isPawnMoveValid(piece, distance)){
-                return false;
-            }
-        }
-
-        if (checkForCheck && moveWouldPutPlayerInCheck(piece.getColour())){
+        if (checkForCheck && moveWouldPutPlayerInCheck(piece.getColour(), end)){
             return false;
         }
 
         return true;
     }
 
-    private boolean moveWouldPutPlayerInCheck(Colour colour) {
+    private boolean isCastleValid(Piece piece, Distance2D distance, Board board, boolean checkForCheck) {
+        if (checkForCheck && board.isColourInCheck(piece.getColour())){
+            return false;
+        }
+
+        if (!(piece instanceof King)){
+            return false;
+        }
+
+        King king = (King) piece;
+
+        if (king.hasPieceMoved()){
+            return false;
+        }
+
+        if (distance.getyDistance() != 0){
+            return false;
+        }
+
+        if (!end.isEmpty()){
+            return false;
+        }
+
+
+        BoardPosition rookPos;
+        int step;
+        if (distance.getxDistance() == 2){
+            rookPos = new BoardPosition(XPosition.values()[end.getBoardPosition().getxPosition().ordinal() + 1],
+                    end.getBoardPosition().getyPosition());
+            step = 1;
+        }
+        else if (distance.getxDistance() == -2){
+            rookPos = new BoardPosition(XPosition.values()[end.getBoardPosition().getxPosition().ordinal() - 2],
+                    end.getBoardPosition().getyPosition());
+            step = -1;
+        }
+        else{
+            return false;
+        }
+
+        if (board.getSquare(rookPos).isEmpty()){
+            return false;
+        }
+
+        Piece possibleRook = board.getSquare(rookPos).getPiece();
+
+        if (!(possibleRook instanceof Rook)){
+            return false;
+        }
+
+        Rook rook = (Rook) possibleRook;
+
+        if (rook.hasPieceMoved()){
+            return false;
+        }
+
+        int x = start.getBoardPosition().getxPosition().ordinal() + step;
+        int xEnd = end.getBoardPosition().getxPosition().ordinal() + step;
+        Square square;
+        while (x != xEnd){
+            square = board.getSquare(new BoardPosition(XPosition.values()[x],start.getBoardPosition().getyPosition()));
+            if (!square.isEmpty()){
+                return false;
+            }
+
+
+            if (moveWouldPutPlayerInCheck(king.getColour(), square)){
+                return false;
+            }
+
+            x += step;
+        }
+
+        if (moveWouldPutPlayerInCheck(king.getColour(), end)){
+            return false;
+        }
+
+        if (moveWouldPutPlayerInCheck(king.getColour(), board.getSquare(rookPos))){
+            return false;
+        }
+
+        isCasle = true;
+        castledRook = rook;
+        castledRookPos = new BoardPosition(XPosition.values()[xEnd - 2*step], rookPos.getyPosition());
+        oldRookPos = rookPos;
+        return true;
+    }
+
+    private boolean moveWouldPutPlayerInCheck(Colour colour, Square endSquare) {
         Board newBoard = Board.getInstance().getCopy();
         Square newStart = newBoard.getSquare(start.getBoardPosition());
-        Square newEnd = newBoard.getSquare(end.getBoardPosition());
+        Square newEnd = newBoard.getSquare(endSquare.getBoardPosition());
         Move newMove = new Move(newStart, newEnd);
-        newMove.movePiece();
+        newMove.movePiece(newEnd);
         return newBoard.isColourInCheck(colour);
     }
 

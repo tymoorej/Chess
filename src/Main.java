@@ -12,7 +12,7 @@ public class Main {
         BoardUIHandler.setup();
         try{
             Player player1 = new Human(Colour.WHITE);
-            Player player2 = new Human(Colour.BLACK);
+            Player player2 = new Bot(Colour.BLACK);
             Player winner = Game.getInstance().GameLoop(player1, player2, 0);
             if (winner == null){
                 System.out.println("Stalemate!");
@@ -20,6 +20,8 @@ public class Main {
             else{
                 System.out.println(winner.getColour().name() + " is the winner!");
             }
+
+            BoardUIHandler.updateBoard();
 
             while (true){
                 sleep(500);
