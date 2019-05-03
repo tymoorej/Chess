@@ -1,27 +1,24 @@
 package NeuralNetworkHelpers;
 
 import BoardHelpers.Board;
-import BoardHelpers.BoardPosition;
 import BoardHelpers.Square;
-import Enums.XPosition;
-import Moves.Move;
 
 public class NeuralNetwork {
     private static final int inputNodes = (Board.ySize * Board.ySize);
     private static final int outputNodes = (Board.ySize * Board.ySize)*(Board.ySize * Board.ySize);
-    private static final int numberOfHiddenLayers = 10;
-    private static int numberOfWeightMatricies;
+    private static final int numberOfHiddenLayers = 15;
+    private static int numberOfWeightMatrices;
     private static int numberOfLayers;
     private static final int sizeOfHiddenLayers = 150;
 
     private Layer[] layers;
-    private WeightMatrix[] weigthMatricies;
+    private WeightMatrix[] weightMatrices;
 
     public NeuralNetwork() {
-        numberOfWeightMatricies = numberOfHiddenLayers + 1;
+        numberOfWeightMatrices = numberOfHiddenLayers + 1;
         numberOfLayers = numberOfHiddenLayers + 2;
         layers = new Layer[numberOfLayers];
-        weigthMatricies = new WeightMatrix[numberOfWeightMatricies];
+        weightMatrices = new WeightMatrix[numberOfWeightMatrices];
 
         layers[0] = new Layer(inputNodes);
 
@@ -31,9 +28,9 @@ public class NeuralNetwork {
 
         layers[numberOfLayers - 1] = new Layer(outputNodes);
 
-        for (int i = 0; i < numberOfWeightMatricies; i++){
-            weigthMatricies[i] = new WeightMatrix(layers[i], layers[i+1]);
-            weigthMatricies[i].randomizeWeigths();
+        for (int i = 0; i < numberOfWeightMatrices; i++){
+            weightMatrices[i] = new WeightMatrix(layers[i], layers[i+1]);
+            weightMatrices[i].randomizeWeigths();
         }
     }
 
@@ -60,7 +57,7 @@ public class NeuralNetwork {
         loadInputLayer(board);
 
         for (int i = 1; i < numberOfLayers; i++){
-            layers[i] = calculateLayer(weigthMatricies[i-1]);
+            layers[i] = calculateLayer(weightMatrices[i-1]);
         }
     }
 

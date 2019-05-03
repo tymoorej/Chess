@@ -1,7 +1,6 @@
 import GameHandlers.Game;
 import Pieces.Colour;
 import Players.Bot;
-import Players.Human;
 import Players.Player;
 import UI.BoardUIHandler;
 

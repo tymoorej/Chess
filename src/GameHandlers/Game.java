@@ -24,6 +24,7 @@ public class Game {
         round = 0;
         lastCaptureRound = 0;
         gameOver = false;
+        winningColour = null;
     }
 
     public int getRound() {
