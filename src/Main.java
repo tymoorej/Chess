@@ -5,13 +5,15 @@ import Players.Human;
 import Players.Player;
 import UI.BoardUIHandler;
 
+
 import static java.lang.Thread.sleep;
 
 public class Main {
-    public static void main(String[] args) {
+
+    public static void start(){
         BoardUIHandler.setup();
         try{
-            Player player1 = new Human(Colour.WHITE);
+            Player player1 = new Bot(Colour.WHITE);
             Player player2 = new Bot(Colour.BLACK);
             Player winner = Game.getInstance().GameLoop(player1, player2, 0);
             if (winner == null){
@@ -34,5 +36,9 @@ public class Main {
         finally {
             System.exit(0);
         }
+    }
+
+    public static void main(String[] args) {
+        start();
     }
 }

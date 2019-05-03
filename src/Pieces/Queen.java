@@ -4,7 +4,7 @@ import BoardHelpers.BoardPosition;
 import BoardHelpers.Distance2D;
 
 public class Queen extends Piece {
-    private static final int value = 9;
+    private static final int value = 5;
     private static final boolean canJump = false;
     private Colour colour;
 

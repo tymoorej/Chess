@@ -2,6 +2,8 @@ package BoardHelpers;
 
 import Pieces.Piece;
 
+import java.util.Objects;
+
 public class Square implements Copyable<Square>{
     private BoardPosition boardPosition;
     private Piece piece;
@@ -42,5 +44,18 @@ public class Square implements Copyable<Square>{
         }
 
         return new Square(boardPosition.getCopy(), piece.getCopy());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Square)) return false;
+        Square square = (Square) o;
+        return Objects.equals(boardPosition, square.boardPosition);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(boardPosition);
     }
 }

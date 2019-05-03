@@ -4,7 +4,7 @@ import BoardHelpers.BoardPosition;
 import BoardHelpers.Distance2D;
 
 public class Rook extends Piece implements IHasMoved{
-    private static final int value = 5;
+    private static final int value = 4;
     private static final boolean canJump = false;
     private Colour colour;
     private boolean hasMoved;

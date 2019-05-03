@@ -10,6 +10,7 @@ import GameHandlers.Game;
 import Pieces.*;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Move {
     private Square start;
@@ -44,6 +45,10 @@ public class Move {
     public void doMove(boolean checkForCheck){
         if (!canMove(checkForCheck, Board.getInstance())){
             throw new IllegalMoveException();
+        }
+
+        if (!end.isEmpty()){
+            Game.getInstance().setLastCaptureRound(Game.getInstance().getRound());
         }
 
         movePiece(end);
@@ -111,7 +116,8 @@ public class Move {
     }
 
     private boolean isCastleValid(Piece piece, Distance2D distance, Board board, boolean checkForCheck) {
-        if (checkForCheck && board.isColourInCheck(piece.getColour())){
+
+        if (!checkForCheck){
             return false;
         }
 
@@ -188,6 +194,10 @@ public class Move {
         }
 
         if (moveWouldPutPlayerInCheck(king.getColour(), board.getSquare(rookPos))){
+            return false;
+        }
+
+        if (board.isColourInCheck(piece.getColour())){
             return false;
         }
 
@@ -354,5 +364,24 @@ public class Move {
         }
 
         return  moves;
+    }
+
+    @Override
+    public String toString() {
+        return start.getBoardPosition().toString() + "->" + end.getBoardPosition().toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Move)) return false;
+        Move move = (Move) o;
+        return Objects.equals(start, move.start) &&
+                Objects.equals(end, move.end);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(start, end);
     }
 }

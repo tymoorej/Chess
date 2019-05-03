@@ -25,4 +25,11 @@ public abstract class Piece implements Copyable<Piece> {
     }
 
     protected abstract String getPieceName();
+
+    public int getOrientedValue(){
+        if (getColour().equals(Colour.WHITE)){
+            return getValue();
+        }
+        return -1 * getValue();
+    }
 }

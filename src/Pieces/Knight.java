@@ -4,7 +4,7 @@ import BoardHelpers.BoardPosition;
 import BoardHelpers.Distance2D;
 
 public class Knight extends Piece {
-    private static final int value = 3;
+    private static final int value = 2;
     private static final boolean canJump = true;
     private Colour colour;
 

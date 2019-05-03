@@ -3,6 +3,8 @@ package BoardHelpers;
 import Enums.XPosition;
 import Exceptions.IllegalPositionException;
 
+import java.util.Objects;
+
 public class BoardPosition implements Copyable<BoardPosition>{
     private XPosition xPosition;
     private Integer yPosition;
@@ -47,5 +49,24 @@ public class BoardPosition implements Copyable<BoardPosition>{
     @Override
     public BoardPosition getCopy() {
         return new BoardPosition(xPosition, yPosition);
+    }
+
+    @Override
+    public String toString() {
+        return xPosition.name() + "-" + yPosition;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BoardPosition)) return false;
+        BoardPosition that = (BoardPosition) o;
+        return xPosition == that.xPosition &&
+                Objects.equals(yPosition, that.yPosition);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(xPosition, yPosition);
     }
 }
