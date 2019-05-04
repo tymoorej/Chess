@@ -82,6 +82,11 @@ public class Move {
 
     public boolean canMove(boolean checkForCheck, Board board){
         Piece piece = start.getPiece();
+
+        if (start.getBoardPosition() == null){
+            return false;
+        }
+
         Distance2D distance = start.getBoardPosition().distanceTo(end.getBoardPosition());
 
         if (start.isEmpty()){

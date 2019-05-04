@@ -49,6 +49,9 @@ public class BoardDrawableRectangle{
 
     public void drawPiece(Graphics graphics){
         Square square = Board.getInstance().getSquare(position);
+        if (square == null){
+            return;
+        }
         Piece piece = square.getPiece();
         if (!square.isEmpty()){
             Image image = piece.getImage();

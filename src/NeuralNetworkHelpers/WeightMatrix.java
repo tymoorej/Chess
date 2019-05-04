@@ -1,45 +1,45 @@
 package NeuralNetworkHelpers;
 
 public class WeightMatrix {
-    private Layer previousLayer;
-    private Layer nextLayer;
+    private int previousLayerSize;
+    private int nextLayerSize;
     private double[][] weights;
 
 
-    public WeightMatrix(Layer previousLayer, Layer nextLayer) {
-        this.previousLayer = previousLayer;
-        this.nextLayer = nextLayer;
-        weights = new double[previousLayer.getSize()][nextLayer.getSize()];
+    public WeightMatrix(int previousLayerSize, int nextLayerSize) {
+        this.previousLayerSize = previousLayerSize;
+        this.nextLayerSize = nextLayerSize;
+        weights = new double[previousLayerSize][nextLayerSize];
 
-        for (int i = 0; i < previousLayer.getSize(); i++){
-            for (int j = 0; j < nextLayer.getSize(); j++){
+        for (int i = 0; i < previousLayerSize; i++){
+            for (int j = 0; j < nextLayerSize; j++){
                 weights[i][j] = 0;
             }
         }
     }
 
     public void randomizeWeigths(){
-        for (int i = 0; i < previousLayer.getSize(); i++){
-            for (int j = 0; j < nextLayer.getSize(); j++){
+        for (int i = 0; i < previousLayerSize; i++){
+            for (int j = 0; j < nextLayerSize; j++){
                 weights[i][j] = (Math.random() * 2) - 1;
             }
         }
     }
 
-    public Layer getPreviousLayer() {
-        return previousLayer;
+    public int getPreviousLayerSize() {
+        return previousLayerSize;
     }
 
-    public void setPreviousLayer(Layer previousLayer) {
-        this.previousLayer = previousLayer;
+    public void setPreviousLayerSize(int previousLayerSize) {
+        this.previousLayerSize = previousLayerSize;
     }
 
-    public Layer getNextLayer() {
-        return nextLayer;
+    public int getNextLayerSize() {
+        return nextLayerSize;
     }
 
-    public void setNextLayer(Layer nextLayer) {
-        this.nextLayer = nextLayer;
+    public void setNextLayerSize(int nextLayerSize) {
+        this.nextLayerSize = nextLayerSize;
     }
 
     public double[][] getWeights() {

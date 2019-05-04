@@ -1,5 +1,6 @@
 package NeuralNetworkHelpers;
 
+import BoardHelpers.Board;
 import BoardHelpers.BoardPosition;
 import BoardHelpers.Square;
 import Enums.XPosition;
@@ -49,8 +50,8 @@ public class OutputNodeIndexCombo implements Comparable<OutputNodeIndexCombo>{
         int endX = endIdx / 8;
         int endY = endIdx % 8;
 
-        Square start = new Square(new BoardPosition(XPosition.values()[startX], startY + 1));
-        Square end = new Square(new BoardPosition(XPosition.values()[endX], endY + 1));
+        Square start = Board.getInstance().getSquare((new BoardPosition(XPosition.values()[startX], startY + 1)));
+        Square end = Board.getInstance().getSquare(new BoardPosition(XPosition.values()[endX], endY + 1));
 
         return new Move(start, end);
 

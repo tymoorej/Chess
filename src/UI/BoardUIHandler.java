@@ -2,6 +2,7 @@ package UI;
 
 import BoardHelpers.Board;
 import BoardHelpers.Square;
+import Exceptions.UINotSetupException;
 import Moves.Move;
 import Players.Human;
 
@@ -17,14 +18,16 @@ public class BoardUIHandler {
     private static Square squareSelected = null;
     private static BoardDrawer boardDrawer;
     private static MouseListener humanMouseListner = null;
+    private static boolean UISetup = false;
 
     public static void setup(){
         jFrame = new JFrame("Chess");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setupBoard();
+        UISetup = true;
     }
 
-    public static void setupBoard(){
+    private static void setupBoard(){
         boardDrawableRectangles = new BoardDrawableRectangle[Board.xSize][Board.ySize];
 
         boardDrawer = new BoardDrawer(boardDrawableRectangles);
@@ -34,7 +37,9 @@ public class BoardUIHandler {
     }
 
     public static void updateBoard(){
-        jFrame.repaint();
+        if (UISetup){
+            jFrame.repaint();
+        }
     }
 
     private static void removeHighlights(){
@@ -46,6 +51,10 @@ public class BoardUIHandler {
     }
 
     public static void makeHumanTurn(Human human){
+
+        if (!UISetup){
+            throw new UINotSetupException();
+        }
 
         updateBoard();
 

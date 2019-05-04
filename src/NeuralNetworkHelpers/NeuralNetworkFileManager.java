@@ -8,13 +8,13 @@ import java.io.*;
 
 public class NeuralNetworkFileManager {
 
-    public static void saveNeuralNetwork(int id, NeuralNetwork neuralNetwork){
+    public static void saveNeuralNetwork(NeuralNetwork neuralNetwork){
         NeuralNetworkSaveableData neuralNetworkSaveableData = new NeuralNetworkSaveableData(neuralNetwork);
 
         Gson gson = new Gson();
         String nnstring =  gson.toJson(neuralNetworkSaveableData);
 
-        File file = new File("NeuralNetworks/" + id + ".txt");
+        File file = new File("NeuralNetworks/" + neuralNetworkSaveableData.getId() + ".txt");
         PrintWriter writer = null;
 
         try {
@@ -50,7 +50,7 @@ public class NeuralNetworkFileManager {
         Gson gson = new Gson();
         NeuralNetworkSaveableData neuralNetworkSaveableData = gson.fromJson(data, NeuralNetworkSaveableData.class);
         NeuralNetwork neuralNetwork = new NeuralNetwork(neuralNetworkSaveableData.getNumberOfHiddenLayers(),
-                neuralNetworkSaveableData.getSizeOfHiddenLayers());
+                neuralNetworkSaveableData.getSizeOfHiddenLayers(), id);
         neuralNetwork.setWeightMatrices(neuralNetworkSaveableData.getWeightMatrices());
 
         return neuralNetwork;

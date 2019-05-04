@@ -19,15 +19,7 @@ public class Board implements Copyable<Board>{
     }
 
     private Board() {
-        squares = new Square[xSize][ySize];
-
-        for (int i = 0; i < xSize; i++){
-            for (int j = 0; j < ySize; j++){
-                squares[i][j] = new Square(new BoardPosition(XPosition.values()[i], j + 1));
-            }
-        }
-
-        placePieces();
+        reset();
     }
 
     private Board(Square[][] squares){
@@ -125,5 +117,17 @@ public class Board implements Copyable<Board>{
         }
 
         return new Board(squaresCopy);
+    }
+
+    public void reset(){
+        squares = new Square[xSize][ySize];
+
+        for (int i = 0; i < xSize; i++){
+            for (int j = 0; j < ySize; j++){
+                squares[i][j] = new Square(new BoardPosition(XPosition.values()[i], j + 1));
+            }
+        }
+
+        placePieces();
     }
 }

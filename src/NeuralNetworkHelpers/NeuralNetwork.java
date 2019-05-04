@@ -10,11 +10,13 @@ public class NeuralNetwork {
     private int numberOfLayers;
     private int numberOfHiddenLayers;
     private int sizeOfHiddenLayers;
+    private int id;
 
     private Layer[] layers;
     private WeightMatrix[] weightMatrices;
 
-    public NeuralNetwork(int numberOfHiddenLayers, int sizeOfHiddenLayers) {
+    public NeuralNetwork(int numberOfHiddenLayers, int sizeOfHiddenLayers, int id) {
+        this.id = id;
         this.numberOfHiddenLayers = numberOfHiddenLayers;
         this.sizeOfHiddenLayers = sizeOfHiddenLayers;
         numberOfWeightMatrices = numberOfHiddenLayers + 1;
@@ -31,7 +33,7 @@ public class NeuralNetwork {
         layers[numberOfLayers - 1] = new Layer(outputNodes);
 
         for (int i = 0; i < numberOfWeightMatrices; i++){
-            weightMatrices[i] = new WeightMatrix(layers[i], layers[i+1]);
+            weightMatrices[i] = new WeightMatrix(layers[i].getSize(), layers[i+1].getSize());
         }
     }
 
@@ -64,14 +66,11 @@ public class NeuralNetwork {
         loadInputLayer(board);
 
         for (int i = 1; i < numberOfLayers; i++){
-            layers[i] = calculateLayer(weightMatrices[i-1]);
+            layers[i] = calculateLayer(weightMatrices[i-1], layers[i-1], layers[i]);
         }
     }
 
-    private Layer calculateLayer(WeightMatrix weightMatrix){
-        Layer nextLayer = weightMatrix.getNextLayer();
-        Layer previousLayer = weightMatrix.getPreviousLayer();
-
+    private Layer calculateLayer(WeightMatrix weightMatrix, Layer previousLayer, Layer nextLayer){
         double temp;
         for (int i = 0; i < nextLayer.getSize(); i++){
             temp = 0;
@@ -107,5 +106,13 @@ public class NeuralNetwork {
 
     public int getSizeOfHiddenLayers() {
         return sizeOfHiddenLayers;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

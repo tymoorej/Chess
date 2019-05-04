@@ -1,5 +1,6 @@
 package GameHandlers;
 
+import BoardHelpers.Board;
 import Enums.GameState;
 import Pieces.Colour;
 import Players.Player;
@@ -20,11 +21,7 @@ public class Game {
     }
 
     public Game() {
-        state = GameState.WHITE_TURN;
-        round = 0;
-        lastCaptureRound = 0;
-        gameOver = false;
-        winningColour = null;
+        reset();
     }
 
     public int getRound() {
@@ -60,7 +57,7 @@ public class Game {
         }
     }
 
-    public Player GameLoop(Player player1, Player player2, int delay) throws InterruptedException {
+    public Player GameLoop(Player player1, Player player2, int delay, int winDelay) throws InterruptedException {
         state = GameState.WHITE_TURN;
 
         round = 0;
@@ -85,8 +82,12 @@ public class Game {
             }
         }
 
-        return getWinner(player1, player2);
+        Player winner = getWinner(player1, player2);
 
+        sleep(winDelay);
+
+        reset();
+        return winner;
     }
 
     public Player getWinner(Player player1, Player player2){
@@ -113,5 +114,14 @@ public class Game {
 
     public Colour getWinningColour() {
         return winningColour;
+    }
+
+    private void reset(){
+        state = GameState.WHITE_TURN;
+        round = 0;
+        lastCaptureRound = 0;
+        gameOver = false;
+        winningColour = null;
+        Board.getInstance().reset();
     }
 }
