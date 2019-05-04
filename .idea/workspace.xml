@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9e81c303-efa7-42e5-b0c8-3b4eac221cf6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/GenerationalAlgorithm/GenerationalTrainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GenerationalAlgorithm/GenerationalTrainer.java" afterDir="false" />
-    </list>
+    <list default="true" id="9e81c303-efa7-42e5-b0c8-3b4eac221cf6" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +14,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="188">
@@ -28,7 +26,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GenerationalAlgorithm/GenerationalTrainer.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
@@ -472,7 +470,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.252349" />
@@ -933,22 +931,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/NeuralNetworkHelpers/WeightMatrix.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-16">
-          <caret line="28" column="39" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
-          <folding>
-            <element signature="e#868#869#0" expanded="true" />
-            <element signature="e#931#932#0" expanded="true" />
-            <element signature="e#989#990#0" expanded="true" />
-            <element signature="e#1026#1027#0" expanded="true" />
-            <element signature="e#1062#1063#0" expanded="true" />
-            <element signature="e#1117#1118#0" expanded="true" />
-            <element signature="e#1167#1168#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GenerationalAlgorithm/IDScoreCombo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-492">
@@ -966,16 +948,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/GenerationalAlgorithm/GenerationalTrainer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -989,6 +961,32 @@
             <element signature="method#playAndScore#0;class#GenerationalTrainer#0" />
             <element signature="method#getRandomCombination#0;class#GenerationalTrainer#0" />
             <element signature="method#createFullRandomNewGeneration#0;class#GenerationalTrainer#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NeuralNetworkHelpers/WeightMatrix.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16">
+          <caret line="28" column="39" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="39" />
+          <folding>
+            <element signature="e#868#869#0" expanded="true" />
+            <element signature="e#931#932#0" expanded="true" />
+            <element signature="e#989#990#0" expanded="true" />
+            <element signature="e#1026#1027#0" expanded="true" />
+            <element signature="e#1062#1063#0" expanded="true" />
+            <element signature="e#1117#1118#0" expanded="true" />
+            <element signature="e#1167#1168#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
