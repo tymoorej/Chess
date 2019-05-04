@@ -44,7 +44,7 @@ public class Main {
     public static void train(){
         GenerationalTrainer generationalTrainer = new GenerationalTrainer();
         try {
-            generationalTrainer.train(true);
+            generationalTrainer.train(false);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
