@@ -15,7 +15,7 @@ import java.util.Collections;
 
 public class GenerationalTrainer {
     private static final int numberOfGenerations = 50;
-    private static final int numberOfNNPerGeneration = 10;
+    private static final int numberOfNNPerGeneration = 20;
     private static final int numberOfHiddenLayers = 10;
     private static final int sizeOfHiddenLayer = 150;
     private static final int generationCarryOver = 5;
